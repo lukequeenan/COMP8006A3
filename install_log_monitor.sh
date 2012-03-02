@@ -18,9 +18,12 @@ function main()
     echo "Duration (days?) to block IP for:"
     read blockDuration
     
+    echo "How often (minutes) to check the log file: "
+    read minuteCheck
+    
     # TODO Check to see if we have a crontab
     # Put the job in the crontab
-    (crontab -l; echo "* * * * * $PWD/log_monitor.sh $blockAttempts $monitorDuration $blockDuration") | crontab -
+    (crontab -l; echo "$minuteCheck * * * * $PWD/log_monitor.sh $blockAttempts $monitorDuration $blockDuration") | crontab -
 }
 
 main
