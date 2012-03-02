@@ -9,6 +9,7 @@ function main()
     fi
     
     # Get user input
+    #TODO Should check user input values
     echo "Number of failed attempts before block: "
     read blockAttempts
 
@@ -21,7 +22,6 @@ function main()
     echo "How often (minutes) to check the log file: "
     read minuteCheck
     
-    # TODO Check to see if we have a crontab
     # Put the job in the crontab
     (crontab -l; echo "$minuteCheck * * * * $PWD/log_monitor.sh $blockAttempts $monitorDuration $blockDuration") | crontab -
 }
