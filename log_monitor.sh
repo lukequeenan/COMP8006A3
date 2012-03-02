@@ -26,10 +26,8 @@ function blockIP()
 # it gets added with a DROP.
 function monitor()
 {
-    tail -1000 /var/log/secure | awk 
-
-    '/sshd/ && /Failed password for/ { if (/invalid user/) evilIP[$13]++; else evilIP[$11]++; }
-    END { for (host in evilIP) if (evilIP[host] > blockAttempts) print host; }' |
+    tail -1000 /var/log/secure | awk '/sshd/ && /Failed password for/ { if (/invalid user/) evilIP[$13]++; else evilIP[$11]++; }
+    END { for (host in evilIP) if (evilIP[host] > $1) print host; }' |
 
     while read ip
     do
