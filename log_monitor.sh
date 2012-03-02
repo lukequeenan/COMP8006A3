@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Make sure the user is running as root (otherwise this won't work)
+if [[ $EUID -ne 0 ]]; then
+    echo "Log Monitor requires root access to run!" 1>&2
+    exit 1
+fi
+
 # Scan /var/log/secure for ssh attempts
 # Use iptables to block evil IPs 
 
