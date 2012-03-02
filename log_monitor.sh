@@ -56,9 +56,4 @@ function main()
     monitor $1 $2 $3
 }
 
-function test()
-{
-    (crontab -l; echo "@monthly $PWD/test.sh $1 $2 $3") | crontab -
-}
-
-test
+main $1 $2 $3

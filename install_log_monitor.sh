@@ -12,7 +12,7 @@ function main()
     echo "Number of failed attempts before block: "
     read blockAttempts
 
-    echo "Duration (days?) between first attempt and attempt that causes a block: "
+    echo "Duration (minutes) between first attempt and attempt that causes a block: "
     read monitorDuration
 
     echo "Duration (days?) to block IP for:"
