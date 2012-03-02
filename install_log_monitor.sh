@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Script to install the log_monitor program in the crontab.
 
 function main()
@@ -16,7 +18,7 @@ function main()
     echo "Duration (minutes) between first attempt and attempt that causes a block: "
     read monitorDuration
 
-    echo "Duration (days?) to block IP for:"
+    echo "Duration (hours) to block IP for:"
     read blockDuration
     
     echo "How often (minutes) to check the log file: "

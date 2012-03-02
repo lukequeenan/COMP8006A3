@@ -1,18 +1,12 @@
 #!/bin/sh
 
-
-
-# Scan /var/log/secure for ssh attempts
-# Use iptables to block evil IPs 
-
-
 # Blocks an IP using iptables and schedules a cronjob for removing the ip after
 # the user defined duration.
 function blockIP()
 {
     /sbin/iptables -A INPUT -s $1 -j DROP
     
-    #(crontab -l; echo "* * * * * $PWD/unblock_ip.sh") | crontab -
+    (crontab -l; echo "* $2 * * * $PWD/unblock_ip.sh $1") | crontab -
 }
 
 
@@ -38,7 +32,7 @@ function monitor()
 		    true
 	    else
 		    # Block IP
-		    blockIP $ip
+		    blockIP $ip $3
 	    fi
     done
 }
