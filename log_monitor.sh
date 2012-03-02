@@ -43,24 +43,22 @@ function monitor()
     done
 }
 
+# Ensures that the job is running as root, then calls the monitor function
 function main()
 {
     # Make sure the user is running as root (otherwise this won't work)
     if [[ $EUID -ne 0 ]]; then
-        echo "Log Monitor requires root access to run!" 1>&2
         exit 1
     fi
 
-    echo "Number of failed attempts before block: "
-    read blockAttempts
-
-    echo "Duration (days?) between first attempt and attempt that causes a block: "
-    read monitorDuration
-
-    echo "Duration (days?) to block IP for:"
-    read blockDuration
-    
-    monitor blockAttempts monitorDuration blockDuration
+    # Call monitor
+    # $1 = blockAttempts $2 = monitorDuration $3 = blockDuration
+    monitor $1 $2 $3
 }
 
-main
+function test()
+{
+    (crontab -l; echo "@monthly $PWD/test.sh $1 $2 $3") | crontab -
+}
+
+test
