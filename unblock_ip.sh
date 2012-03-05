@@ -8,9 +8,9 @@ function removeIP()
     /sbin/iptables -D INPUT -s $1 -j DROP
     
     # Remove this cronjob from the crontab
-    crontab -l >$cronTemp
-    awk '$0!~/$1/ { print $0 }' $cronTemp >$cronNew
-    crontab $cronNew
+    crontab -l &> cronTemp
+    sed -e "/$1/d" cronTemp > cronNew
+    crontab cronNew
 }
 
 function main()
