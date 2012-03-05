@@ -12,20 +12,17 @@ function main()
     
     # Get user input
     #TODO Should check user input values
-    echo "Number of failed attempts before block: "
+    echo "Number of failed attempts per day before block: "
     read blockAttempts
-
-    echo "Duration (minutes) between first attempt and attempt that causes a block: "
-    read monitorDuration
 
     echo "Duration (hours) to block IP for:"
     read blockDuration
     
-    echo "How often (minutes) to check the log file: "
+    echo "How often (minutes) to check the log file by running this script: "
     read minuteCheck
     
     # Put the job in the crontab
-    (crontab -l; echo "$minuteCheck * * * * $PWD/log_monitor.sh $blockAttempts $monitorDuration $blockDuration") | crontab -
+    (crontab -l; echo "$minuteCheck * * * * $PWD/log_monitor.sh $blockAttempts $blockDuration") | crontab -
 }
 
 main

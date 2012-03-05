@@ -31,7 +31,7 @@ function monitor()
 		    true
 	    else
 		    # Block IP
-		    blockIP $ip $3
+		    blockIP $ip $2
 	    fi
     done
 }
@@ -45,8 +45,8 @@ function main()
     fi
 
     # Call monitor
-    # $1 = blockAttempts $2 = monitorDuration $3 = blockDuration
-    monitor $1 $2 $3
+    # $1 = blockAttempts $2 = blockDuration
+    monitor $1 $2
 }
 
-main $1 $2 $3
+main $1 $2
